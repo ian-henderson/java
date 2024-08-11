@@ -15,14 +15,14 @@ public interface QuickSort {
             return;
         }
 
-        QuickSort.recurse(array, 0, array.length - 1);
+        recurse(array, 0, array.length - 1);
     }
 
     static void recurse(int[] array, int left, int right) {
         if (left < right) {
-            int partitionIndex = QuickSort.partition(array, left, right);
-            QuickSort.recurse(array, left, partitionIndex - 1);
-            QuickSort.recurse(array, partitionIndex + 1, right);
+            int partitionIndex = partition(array, left, right);
+            recurse(array, left, partitionIndex - 1);
+            recurse(array, partitionIndex + 1, right);
         }
     }
 

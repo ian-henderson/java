@@ -17,7 +17,7 @@ public interface HeapSort {
 
         // build heap
         for (int root = heapSize / 2 - 1; root >= 0; root--) {
-            HeapSort.heapify(array, heapSize, root);
+            heapify(array, heapSize, root);
         }
 
         // extract elements from heap one by one
@@ -26,7 +26,7 @@ public interface HeapSort {
             SortingUtilities.swap(array, 0, i);
 
             // call max heapify on the reduced heap
-            HeapSort.heapify(array, i, 0);
+            heapify(array, i, 0);
         }
     }
 
@@ -49,7 +49,7 @@ public interface HeapSort {
             SortingUtilities.swap(array, root, largest);
 
             // recursively heapify the affected subtree
-            HeapSort.heapify(array, heapSize, largest);
+            heapify(array, heapSize, largest);
         }
     }
 }

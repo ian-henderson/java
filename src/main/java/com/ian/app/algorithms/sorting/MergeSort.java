@@ -13,7 +13,7 @@ public interface MergeSort {
             return;
         }
 
-        MergeSort.recurse(array, 0, array.length - 1);
+        recurse(array, 0, array.length - 1);
     }
 
     static void recurse(int[] array, int left, int right) {
@@ -22,9 +22,9 @@ public interface MergeSort {
         }
 
         int mid = left + (right - left) / 2;
-        MergeSort.recurse(array, left, mid);
-        MergeSort.recurse(array, mid + 1, right);
-        MergeSort.merge(array, left, mid, right);
+        recurse(array, left, mid);
+        recurse(array, mid + 1, right);
+        merge(array, left, mid, right);
     }
 
     static void merge(int[] array, int left, int mid, int right) {

@@ -11,7 +11,7 @@ public interface SortingUtilities {
         return true;
     }
 
-    static void swap(int[] array, int x, int y) {
+    static void swap(int[] array, int x, int y) throws IndexOutOfBoundsException {
         if (x > array.length - 1) {
             throw new IndexOutOfBoundsException("Index x out of bounds: " + x);
         }
