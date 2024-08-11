@@ -58,4 +58,53 @@ public interface Fibonacci {
 
         return c;
     }
+
+    static long fibonacciOptimal(int n) throws Exception {
+        if (n < 0) {
+            throw new Exception("n must be positive");
+        }
+
+        if (n <= 1) {
+            return (long) n;
+        }
+
+        long a = 0, b = 1, temp;
+
+        for (int i = 2; i <= n; i++) {
+            temp = b;
+            b += a;
+            a = temp;
+
+            if (b < a) {
+                throw new ArithmeticException("Long int overflow");
+            }
+        }
+
+        return b;
+    }
+
+    static long fibonacciTabulated(int n) throws Exception {
+        if (n < 0) {
+            throw new Exception("n must be positive");
+        }
+
+        if (n <= 1) {
+            return (long) n;
+        }
+
+        long[] memo = new long[n + 1];
+        memo[0] = 0L;
+        memo[1] = 1L;
+
+        for (int i = 2; i <= n; i++) {
+            memo[i] = memo[i - 1] + memo[i - 2];
+
+            // overflow check
+            if (memo[i] < memo[i - 1]) {
+                throw new Exception("Long int overflow");
+            }
+        }
+
+        return memo[n];
+    }
 }

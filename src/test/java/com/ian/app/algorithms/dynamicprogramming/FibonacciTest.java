@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class FibonacciTest {
     @Test
     public void fibonacciMemoizedShouldHandleZeroCase() throws Exception {
-        assertEquals(Fibonacci.fibonacciMemoized(0), 0L);
+        assertEquals(0L, Fibonacci.fibonacciMemoized(0));
     }
 
     @Test(expected = Exception.class)
@@ -17,12 +17,12 @@ public class FibonacciTest {
 
     @Test
     public void fibonacciMemoizedShouldHandleNCase() throws Exception {
-        assertEquals(Fibonacci.fibonacciMemoized(36), 14930352L);
+        assertEquals(14930352L, Fibonacci.fibonacciMemoized(36));
     }
 
     @Test
     public void fibonacciNaiveShouldHandleZeroCase() throws Exception {
-        assertEquals(Fibonacci.fibonacciNaive(0), 0L);
+        assertEquals(0L, Fibonacci.fibonacciNaive(0));
     }
 
     @Test(expected = Exception.class)
@@ -32,6 +32,36 @@ public class FibonacciTest {
 
     @Test
     public void fibonacciNaiveShouldHandleNCase() throws Exception {
-        assertEquals(Fibonacci.fibonacciNaive(36), 14930352L);
+        assertEquals(14930352L, Fibonacci.fibonacciNaive(36));
+    }
+
+    @Test
+    public void fibonacciOptimalShouldHandleZeroCase() throws Exception {
+        assertEquals(0L, Fibonacci.fibonacciOptimal(0));
+    }
+
+    @Test(expected = Exception.class)
+    public void fibonacciOptimalShouldThrowNegativeN() throws Exception {
+        Fibonacci.fibonacciOptimal(-1);
+    }
+
+    @Test
+    public void fibonacciOptimalShouldHandleNCase() throws Exception {
+        assertEquals(14930352L, Fibonacci.fibonacciOptimal(36));
+    }
+
+    @Test
+    public void fibonacciTabulatedShouldHandleZeroCase() throws Exception {
+        assertEquals(0L, Fibonacci.fibonacciTabulated(0));
+    }
+
+    @Test(expected = Exception.class)
+    public void fibonacciTabulatedShouldThrowNegativeN() throws Exception {
+        Fibonacci.fibonacciTabulated(-1);
+    }
+
+    @Test
+    public void fibonacciTabulatedShouldHandleNCase() throws Exception {
+        assertEquals(14930352L, Fibonacci.fibonacciTabulated(36));
     }
 }

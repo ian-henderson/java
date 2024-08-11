@@ -1,6 +1,6 @@
-#  Java
+# java
 
-Maven project generated with this command: 
+Maven project generated with this command:
 
 ```bash
 mvn -B archetype:generate \
