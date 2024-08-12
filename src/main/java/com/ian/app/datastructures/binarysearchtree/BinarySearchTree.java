@@ -12,7 +12,7 @@ public class BinarySearchTree {
     }
 
     public boolean delete(int key) {
-        BinarySearchTreeNode node = this.root, parent = null;
+        BinarySearchTreeNode node = getRoot(), parent = null;
 
         while (node != null && node.getKey() != key) {
             parent = node;
@@ -33,7 +33,7 @@ public class BinarySearchTree {
         } else if (node.getRight() == null) {
             transplant(node, node.getLeft());
         } else {
-            parent = nodeMinimum(node.getRight());
+            parent = getNodeMinimum(node.getRight());
 
             if (parent != node.getRight()) {
                 transplant(parent, parent.getRight());
@@ -49,14 +49,86 @@ public class BinarySearchTree {
         return true;
     }
 
-    public void insert(int key) {
-        BinarySearchTreeNode current = this.root, parent = null;
+    public int getHeight() {
+        return getNodeHeight(getRoot());
+    }
+
+    private int getNodeHeight(BinarySearchTreeNode node) {
+        if (node == null) {
+            return -1;
+        }
+
+        int max = Math.max(
+                getNodeHeight(node.getLeft()),
+                getNodeHeight(node.getRight()));
+
+        return max + 1;
+    }
+
+    static private BinarySearchTreeNode getNodeMaximum(BinarySearchTreeNode x) {
+        while (x.getRight() != null) {
+            x = x.getRight();
+        }
+
+        return x;
+    }
+
+    static private BinarySearchTreeNode getNodeMinimum(BinarySearchTreeNode x) {
+        while (x.getLeft() != null) {
+            x = x.getLeft();
+        }
+
+        return x;
+    }
+
+    static private BinarySearchTreeNode getNodePredecessor(BinarySearchTreeNode x) {
+        if (x == null) {
+            return null;
+        }
+
+        if (x.getLeft() != null) {
+            return getNodeMaximum(x.getLeft());
+        }
+
+        // Find the highest ancestor of x whose right child is an ancestor of x
+        BinarySearchTreeNode current = x, parent = x.getParent();
+
+        while (parent != null && current == parent.getLeft()) {
+            current = parent;
+            parent = parent.getParent();
+        }
+
+        return parent;
+    }
+
+    static private BinarySearchTreeNode getNodeSuccessor(BinarySearchTreeNode x) {
+        if (x == null) {
+            return null;
+        }
+
+        if (x.getRight() != null) {
+            return getNodeMinimum(x.getRight());
+        }
+
+        // Find the lowest ancestor of x whose left child is an ancestor of x
+        BinarySearchTreeNode current = x, parent = x.getParent();
+
+        while (parent != null && current == parent.getRight()) {
+            current = parent;
+            parent = parent.getParent();
+        }
+
+        return parent;
+    }
+
+    public boolean insert(int key) {
+        BinarySearchTreeNode current = getRoot(), parent = null;
 
         while (current != null) {
             parent = current;
 
             if (key == current.getKey()) { // duplicate key
-                return;
+                return false;
             }
 
             if (key < current.getKey()) {
@@ -77,25 +149,21 @@ public class BinarySearchTree {
         } else {
             parent.setRight(newNode);
         }
-    }
 
-    private BinarySearchTreeNode nodeMinimum(BinarySearchTreeNode x) {
-        while (x.getLeft() != null) {
-            x = x.getLeft();
-        }
-
-        return x;
+        return true;
     }
 
     public void print() {
-        if (this.root == null) {
+        if (getRoot() == null) {
             System.out.println("No data in tree");
             return;
         }
 
-        printRecurse(this.root);
+        System.out.print("[");
 
-        System.out.println();
+        printRecurse(getRoot());
+
+        System.out.println("]");
     }
 
     static private void printRecurse(BinarySearchTreeNode node) {
@@ -105,13 +173,17 @@ public class BinarySearchTree {
 
         printRecurse(node.getLeft());
 
-        System.out.printf("%d ", node.getKey());
+        System.out.print(node.getKey());
+
+        if (getNodeSuccessor(node) != null) {
+            System.out.print(", ");
+        }
 
         printRecurse(node.getRight());
     }
 
     public BinarySearchTreeNode search(int key) {
-        return searchRecurse(this.root, key);
+        return searchRecurse(getRoot(), key);
     }
 
     static private BinarySearchTreeNode searchRecurse(BinarySearchTreeNode node,
