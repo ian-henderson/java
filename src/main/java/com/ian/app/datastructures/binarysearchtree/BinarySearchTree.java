@@ -3,16 +3,8 @@ package com.ian.app.datastructures.binarysearchtree;
 public class BinarySearchTree {
     private BinarySearchTreeNode root = null;
 
-    public BinarySearchTreeNode getRoot() {
-        return root;
-    }
-
-    public void setRoot(BinarySearchTreeNode root) {
-        this.root = root;
-    }
-
     public boolean delete(int key) {
-        BinarySearchTreeNode node = getRoot(), parent = null;
+        BinarySearchTreeNode node = root, parent = null;
 
         while (node != null && node.getKey() != key) {
             parent = node;
@@ -50,7 +42,7 @@ public class BinarySearchTree {
     }
 
     public int getHeight() {
-        return getNodeHeight(getRoot());
+        return getNodeHeight(root);
     }
 
     private int getNodeHeight(BinarySearchTreeNode node) {
@@ -122,7 +114,7 @@ public class BinarySearchTree {
     }
 
     public boolean insert(int key) {
-        BinarySearchTreeNode current = getRoot(), parent = null;
+        BinarySearchTreeNode current = root, parent = null;
 
         while (current != null) {
             parent = current;
@@ -143,7 +135,7 @@ public class BinarySearchTree {
         newNode.setParent(parent);
 
         if (parent == null) {
-            setRoot(newNode);
+            root = newNode;
         } else if (newNode.getKey() < parent.getKey()) {
             parent.setLeft(newNode);
         } else {
@@ -154,14 +146,14 @@ public class BinarySearchTree {
     }
 
     public void print() {
-        if (getRoot() == null) {
+        if (root == null) {
             System.out.println("No data in tree");
             return;
         }
 
         System.out.print("[");
 
-        printRecurse(getRoot());
+        printRecurse(root);
 
         System.out.println("]");
     }
@@ -183,11 +175,11 @@ public class BinarySearchTree {
     }
 
     public BinarySearchTreeNode search(int key) {
-        return searchRecurse(getRoot(), key);
+        return searchRecurse(root, key);
     }
 
     static private BinarySearchTreeNode searchRecurse(BinarySearchTreeNode node,
-                                                      int key) {
+            int key) {
         if (node == null || node.getKey() == key) {
             return node;
         }
@@ -200,9 +192,9 @@ public class BinarySearchTree {
     }
 
     private void transplant(BinarySearchTreeNode u,
-                            BinarySearchTreeNode v) {
+            BinarySearchTreeNode v) {
         if (u.getParent() == null) {
-            setRoot(v);
+            root = v;
         } else if (u == u.getParent().getLeft()) {
             u.getParent().setLeft(v);
         } else {
