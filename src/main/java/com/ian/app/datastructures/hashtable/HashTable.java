@@ -4,16 +4,12 @@ public class HashTable {
     private int capacity = 100;
     private Node[] buffer = new Node[capacity];
 
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public boolean delete(String key) {
+    public void delete(String key) {
         int index = hash(key);
         Node current = buffer[index], previous = null;
 
         if (current == null) {
-            return true;
+            return;
         }
 
         while (current != null) {
@@ -33,8 +29,6 @@ public class HashTable {
             previous = current;
             current = current.getNext();
         }
-
-        return true;
     }
 
     public String get(String key) {
@@ -65,13 +59,12 @@ public class HashTable {
         return hash;
     }
 
-    public boolean set(String key, String value) {
+    public void set(String key, String value) {
         if (get(key) == value) {
-            return false;
+            return;
         }
 
         Node node = new Node(key, value);
-
         int index = hash(key);
 
         if (buffer[index] == null) {
@@ -80,7 +73,5 @@ public class HashTable {
             node.setNext(buffer[index]);
             buffer[index] = node;
         }
-
-        return true;
     }
 }

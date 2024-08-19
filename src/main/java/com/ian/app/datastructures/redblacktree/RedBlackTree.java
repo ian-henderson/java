@@ -225,14 +225,14 @@ public class RedBlackTree {
         return successor;
     }
 
-    public boolean insert(int key) {
+    public void insert(int key) {
         Node current = root, parent = null;
 
         while (current != null) {
             parent = current;
 
             if (key == current.getKey()) { // duplicate key
-                return false;
+                return;
             }
 
             if (key < current.getKey()) {
@@ -255,16 +255,14 @@ public class RedBlackTree {
 
         if (newNode.getParent() == null) {
             newNode.setColor(Color.BLACK);
-            return true;
+            return;
         }
 
         if (newNode.getParent().getParent() == null) {
-            return true;
+            return;
         }
 
         fixInsert(newNode);
-
-        return true;
     }
 
     private static boolean nodeHasRedChild(Node node) {
