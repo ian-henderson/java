@@ -3,11 +3,11 @@ package com.ian.app.datastructures.queue;
 import java.util.OptionalInt;
 
 public class Queue {
-    private QueueNode head = null, tail = null;
+    private Node head = null, tail = null;
     private int length = 0;
 
     public void add(int key) {
-        QueueNode newNode = new QueueNode(key);
+        Node newNode = new Node(key);
         length++;
 
         // base case: empty queue

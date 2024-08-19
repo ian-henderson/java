@@ -1,20 +1,16 @@
 package com.ian.app.datastructures.hashtable;
 
 public class HashTable {
-    private int capacity = 100, nodeCount = 0;
-    private HashTableNode[] buffer = new HashTableNode[capacity];
+    private int capacity = 100;
+    private Node[] buffer = new Node[capacity];
 
     public int getCapacity() {
         return capacity;
     }
 
-    public int getNodeCount() {
-        return nodeCount;
-    }
-
     public boolean delete(String key) {
         int index = hash(key);
-        HashTableNode current = buffer[index], previous = null;
+        Node current = buffer[index], previous = null;
 
         if (current == null) {
             return true;
@@ -31,7 +27,6 @@ public class HashTable {
                     previous.setNext(current.getNext());
                 }
 
-                nodeCount--;
                 break;
             }
 
@@ -43,7 +38,7 @@ public class HashTable {
     }
 
     public String get(String key) {
-        HashTableNode current = buffer[hash(key)];
+        Node current = buffer[hash(key)];
 
         while (current != null) {
             if (current.getKey() == key) {
@@ -75,7 +70,7 @@ public class HashTable {
             return false;
         }
 
-        HashTableNode node = new HashTableNode(key, value);
+        Node node = new Node(key, value);
 
         int index = hash(key);
 
@@ -85,8 +80,6 @@ public class HashTable {
             node.setNext(buffer[index]);
             buffer[index] = node;
         }
-
-        nodeCount++;
 
         return true;
     }

@@ -1,10 +1,12 @@
 package com.ian.app.datastructures.binarysearchtree;
 
-public class BinarySearchTree {
-    private BinarySearchTreeNode root = null;
+import java.util.OptionalInt;
 
-    public boolean delete(int key) {
-        BinarySearchTreeNode node = root, parent = null;
+public class BinarySearchTree {
+    private Node root = null;
+
+    public void delete(int key) {
+        Node node = root, parent = null;
 
         while (node != null && node.getKey() != key) {
             parent = node;
@@ -17,7 +19,7 @@ public class BinarySearchTree {
         }
 
         if (node == null) { // node not found
-            return false;
+            return;
         }
 
         if (node.getLeft() == null) {
@@ -37,43 +39,43 @@ public class BinarySearchTree {
             parent.setLeft(node.getLeft());
             parent.getLeft().setParent(parent);
         }
-
-        return true;
     }
 
     public int getHeight() {
         return getNodeHeight(root);
     }
 
-    private int getNodeHeight(BinarySearchTreeNode node) {
+    private int getNodeHeight(Node node) {
         if (node == null) {
             return -1;
         }
 
-        int max = Math.max(
-                getNodeHeight(node.getLeft()),
-                getNodeHeight(node.getRight()));
+        int max = Math.max(getNodeHeight(node.getLeft()), getNodeHeight(node.getRight()));
 
         return max + 1;
     }
 
-    static private BinarySearchTreeNode getNodeMaximum(BinarySearchTreeNode x) {
-        while (x.getRight() != null) {
-            x = x.getRight();
+    private static Node getNodeMaximum(Node node) {
+        Node current = node;
+
+        while (current.getRight() != null) {
+            current = current.getRight();
         }
 
-        return x;
+        return current;
     }
 
-    static private BinarySearchTreeNode getNodeMinimum(BinarySearchTreeNode x) {
-        while (x.getLeft() != null) {
-            x = x.getLeft();
+    private static Node getNodeMinimum(Node node) {
+        Node current = node;
+
+        while (current.getLeft() != null) {
+            current = current.getLeft();
         }
 
-        return x;
+        return current;
     }
 
-    static private BinarySearchTreeNode getNodePredecessor(BinarySearchTreeNode x) {
+    private static Node getNodePredecessor(Node x) {
         if (x == null) {
             return null;
         }
@@ -83,7 +85,7 @@ public class BinarySearchTree {
         }
 
         // Find the highest ancestor of x whose right child is an ancestor of x
-        BinarySearchTreeNode current = x, parent = x.getParent();
+        Node current = x, parent = x.getParent();
 
         while (parent != null && current == parent.getLeft()) {
             current = parent;
@@ -93,7 +95,7 @@ public class BinarySearchTree {
         return parent;
     }
 
-    static private BinarySearchTreeNode getNodeSuccessor(BinarySearchTreeNode x) {
+    private static Node getNodeSuccessor(Node x) {
         if (x == null) {
             return null;
         }
@@ -103,7 +105,7 @@ public class BinarySearchTree {
         }
 
         // Find the lowest ancestor of x whose left child is an ancestor of x
-        BinarySearchTreeNode current = x, parent = x.getParent();
+        Node current = x, parent = x.getParent();
 
         while (parent != null && current == parent.getRight()) {
             current = parent;
@@ -113,14 +115,14 @@ public class BinarySearchTree {
         return parent;
     }
 
-    public boolean insert(int key) {
-        BinarySearchTreeNode current = root, parent = null;
+    public void insert(int key) {
+        Node current = root, parent = null;
 
         while (current != null) {
             parent = current;
 
             if (key == current.getKey()) { // duplicate key
-                return false;
+                return;
             }
 
             if (key < current.getKey()) {
@@ -130,7 +132,7 @@ public class BinarySearchTree {
             }
         }
 
-        BinarySearchTreeNode newNode = new BinarySearchTreeNode(key);
+        Node newNode = new Node(key);
 
         newNode.setParent(parent);
 
@@ -141,58 +143,37 @@ public class BinarySearchTree {
         } else {
             parent.setRight(newNode);
         }
-
-        return true;
     }
 
-    public void print() {
-        if (root == null) {
-            System.out.println("No data in tree");
-            return;
+    public OptionalInt search(int key) {
+        Node result = searchNode(key);
+
+        if (result == null) {
+            return OptionalInt.empty();
         }
 
-        System.out.print("[");
-
-        printRecurse(root);
-
-        System.out.println("]");
+        return OptionalInt.of(result.getKey());
     }
 
-    static private void printRecurse(BinarySearchTreeNode node) {
-        if (node == null) {
-            return;
+    private Node searchNode(int key) {
+        Node current = root;
+
+        while (current != null) {
+            if (key == current.getKey()) {
+                return current;
+            }
+
+            if (key < current.getKey()) {
+                current = current.getLeft();
+            } else {
+                current = current.getRight();
+            }
         }
 
-        printRecurse(node.getLeft());
-
-        System.out.print(node.getKey());
-
-        if (getNodeSuccessor(node) != null) {
-            System.out.print(", ");
-        }
-
-        printRecurse(node.getRight());
+        return null;
     }
 
-    public BinarySearchTreeNode search(int key) {
-        return searchRecurse(root, key);
-    }
-
-    static private BinarySearchTreeNode searchRecurse(BinarySearchTreeNode node,
-            int key) {
-        if (node == null || node.getKey() == key) {
-            return node;
-        }
-
-        if (key < node.getKey()) {
-            return searchRecurse(node.getLeft(), key);
-        }
-
-        return searchRecurse(node.getRight(), key);
-    }
-
-    private void transplant(BinarySearchTreeNode u,
-            BinarySearchTreeNode v) {
+    private void transplant(Node u, Node v) {
         if (u.getParent() == null) {
             root = v;
         } else if (u == u.getParent().getLeft()) {

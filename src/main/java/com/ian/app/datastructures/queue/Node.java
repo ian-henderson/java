@@ -1,27 +1,27 @@
 package com.ian.app.datastructures.queue;
 
-public class QueueNode {
-    private QueueNode previous, next;
+public class Node {
+    private Node previous, next;
     private int key;
 
-    public QueueNode(int key) {
+    public Node(int key) {
         this.previous = this.next = null;
         this.key = key;
     }
 
-    public QueueNode getPrevious() {
+    public Node getPrevious() {
         return previous;
     }
 
-    public void setPrevious(QueueNode previous) {
+    public void setPrevious(Node previous) {
         this.previous = previous;
     }
 
-    public QueueNode getNext() {
+    public Node getNext() {
         return next;
     }
 
-    public void setNext(QueueNode next) {
+    public void setNext(Node next) {
         this.next = next;
     }
 

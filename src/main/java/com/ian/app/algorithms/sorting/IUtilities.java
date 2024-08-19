@@ -1,7 +1,7 @@
 package com.ian.app.algorithms.sorting;
 
-public interface SortingUtilities {
-    static boolean arrayIsSorted(int[] array) {
+public interface IUtilities {
+    public static boolean isSorted(int[] array) {
         for (int i = 0; i < array.length - 1; i++) {
             if (array[i] > array[i + 1]) {
                 return false;
@@ -11,7 +11,7 @@ public interface SortingUtilities {
         return true;
     }
 
-    static void swap(int[] array, int x, int y) throws IndexOutOfBoundsException {
+    public static void swap(int[] array, int x, int y) throws IndexOutOfBoundsException {
         if (x > array.length - 1) {
             throw new IndexOutOfBoundsException("Index x out of bounds: " + x);
         }

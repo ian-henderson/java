@@ -1,22 +1,22 @@
 package com.ian.app.datastructures.hashtable;
 
-public class HashTableNode {
-    private HashTableNode next = null, previous = null;
+public class Node {
+    private Node next = null, previous = null;
     private String key, value;
 
-    public HashTableNode getNext() {
+    public Node getNext() {
         return next;
     }
 
-    public void setNext(HashTableNode next) {
+    public void setNext(Node next) {
         this.next = next;
     }
 
-    public HashTableNode getPrevious() {
+    public Node getPrevious() {
         return previous;
     }
 
-    public void setPrevious(HashTableNode previous) {
+    public void setPrevious(Node previous) {
         this.previous = previous;
     }
 
@@ -36,7 +36,7 @@ public class HashTableNode {
         this.value = value;
     }
 
-    public HashTableNode(String key, String value) {
+    public Node(String key, String value) {
         this.key = key;
         this.value = value;
     }

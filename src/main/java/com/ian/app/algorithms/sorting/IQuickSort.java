@@ -9,16 +9,16 @@ package com.ian.app.algorithms.sorting;
 // Worst-case Space Complexity: O(n) auxiliary (naive)
 //                              O(log(n)) auxiliary (Hoare 1962)
 
-public interface QuickSort {
-    static void sort(int[] array) {
-        if (SortingUtilities.arrayIsSorted(array)) {
+public interface IQuickSort {
+    public static void sort(int[] array) {
+        if (IUtilities.isSorted(array)) {
             return;
         }
 
         recurse(array, 0, array.length - 1);
     }
 
-    static void recurse(int[] array, int left, int right) {
+    public static void recurse(int[] array, int left, int right) {
         if (left < right) {
             int partitionIndex = partition(array, left, right);
             recurse(array, left, partitionIndex - 1);
@@ -30,7 +30,7 @@ public interface QuickSort {
     // element at its correct position in sorted array, and places all
     // smaller to left of pivot, and all greater elements to the right of the
     // pivot.
-    static int partition(int[] array, int left, int right) {
+    public static int partition(int[] array, int left, int right) {
         int pivot = array[right];
 
         // Index of smaller element and indicates the right position of pivot
@@ -41,11 +41,11 @@ public interface QuickSort {
             // if current element is smaller than the pivot
             if (array[j] < pivot) {
                 i++;
-                SortingUtilities.swap(array, i, j);
+                IUtilities.swap(array, i, j);
             }
         }
 
-        SortingUtilities.swap(array, i + 1, right);
+        IUtilities.swap(array, i + 1, right);
 
         return i + 1;
     }

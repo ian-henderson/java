@@ -7,16 +7,16 @@ package com.ian.app.algorithms.sorting;
 //  Worst-case space complexity: O(n) total with O(n) auxiliary, O(1) auxiliary
 //                                  with linked lists
 
-public interface MergeSort {
-    static void sort(int[] array) {
-        if (SortingUtilities.arrayIsSorted(array)) {
+public interface IMergeSort {
+    public static void sort(int[] array) {
+        if (IUtilities.isSorted(array)) {
             return;
         }
 
         recurse(array, 0, array.length - 1);
     }
 
-    static void recurse(int[] array, int left, int right) {
+    public static void recurse(int[] array, int left, int right) {
         if (left >= right) {
             return;
         }
@@ -27,7 +27,7 @@ public interface MergeSort {
         merge(array, left, mid, right);
     }
 
-    static void merge(int[] array, int left, int mid, int right) {
+    public static void merge(int[] array, int left, int mid, int right) {
         int subArrayOne = mid - left + 1;
         int subArrayTwo = right - mid;
 

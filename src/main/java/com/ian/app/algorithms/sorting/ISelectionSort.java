@@ -6,9 +6,9 @@ package com.ian.app.algorithms.sorting;
 // Average performance:         O(n^2) comparisons, O(n) swaps
 // Worst-case Space Complexity: O(1) auxiliary
 
-public interface SelectionSort {
-    static void sort(int[] array) {
-        if (SortingUtilities.arrayIsSorted(array)) {
+public interface ISelectionSort {
+    public static void sort(int[] array) {
+        if (IUtilities.isSorted(array)) {
             return;
         }
 
@@ -22,7 +22,7 @@ public interface SelectionSort {
             }
 
             if (i != smallestIndex) {
-                SortingUtilities.swap(array, i, smallestIndex);
+                IUtilities.swap(array, i, smallestIndex);
             }
         }
     }

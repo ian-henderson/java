@@ -6,9 +6,9 @@ package com.ian.app.algorithms.sorting;
 //  Average-case performance: O(n^2), O(n^2) swaps
 //  Worst-case complexity:  O(n) total O(1) auxiliary
 
-public interface BubbleSort {
-    static void sort(int[] array) {
-        if (SortingUtilities.arrayIsSorted(array)) {
+public interface IBubbleSort {
+    public static void sort(int[] array) {
+        if (IUtilities.isSorted(array)) {
             return;
         }
 
@@ -17,7 +17,7 @@ public interface BubbleSort {
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
                 if (array[j] > array[j + 1]) {
-                    SortingUtilities.swap(array, j, j + 1);
+                    IUtilities.swap(array, j, j + 1);
                 }
             }
         }

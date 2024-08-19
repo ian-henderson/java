@@ -6,9 +6,9 @@ package com.ian.app.algorithms.sorting;
 // Average performance:         O(n^2) comparisons and swaps
 // Worst-case space complexity: O(n) total, O(1) auxiliary
 
-public interface InsertionSort {
-    static void sort(int[] array) {
-        if (SortingUtilities.arrayIsSorted(array)) {
+public interface IInsertionSort {
+    public static void sort(int[] array) {
+        if (IUtilities.isSorted(array)) {
             return;
         }
 

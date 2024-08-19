@@ -48,25 +48,4 @@ public class HashTableTest {
             assertNull(t.get(key));
         }
     }
-
-    @Test
-    public void shouldTrackNodeCount() {
-        HashTable t = new HashTable();
-
-        assertEquals(0, t.getNodeCount());
-
-        for (String[] entry : entries) {
-            String key = entry[0], value = entry[1];
-            t.set(key, value);
-        }
-
-        assertEquals(6, t.getNodeCount());
-
-        for (String[] entry : entries) {
-            String key = entry[0];
-            t.delete(key);
-        }
-
-        assertEquals(0, t.getNodeCount());
-    }
 }

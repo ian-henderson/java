@@ -3,7 +3,7 @@ package com.ian.app.datastructures.stack;
 import java.util.OptionalInt;
 
 public class Stack {
-    private StackNode head = null;
+    private Node head = null;
     private int length = 0;
 
     public int getLength() {
@@ -31,7 +31,7 @@ public class Stack {
     }
 
     public void push(int key) {
-        StackNode node = new StackNode(key);
+        Node node = new Node(key);
         length++;
 
         if (head == null) {
