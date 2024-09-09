@@ -49,28 +49,20 @@ public interface IMergeSort {
         // merge the temp arrays back into array[left...right]
         while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo) {
             if (leftArray[indexOfSubArrayOne] <= rightArray[indexOfSubArrayTwo]) {
-                array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
-                indexOfSubArrayOne++;
+                array[indexOfMergedArray++] = leftArray[indexOfSubArrayOne++];
             } else {
-                array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
-                indexOfSubArrayTwo++;
+                array[indexOfMergedArray++] = rightArray[indexOfSubArrayTwo++];
             }
-
-            indexOfMergedArray++;
         }
 
         // copy the remaining elements of leftArray if there are any
         while (indexOfSubArrayOne < subArrayOne) {
-            array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
-            indexOfSubArrayOne++;
-            indexOfMergedArray++;
+            array[indexOfMergedArray++] = leftArray[indexOfSubArrayOne++];
         }
 
         // copy the remaining elements of rightArray if there are any
         while (indexOfSubArrayTwo < subArrayTwo) {
-            array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
-            indexOfSubArrayTwo++;
-            indexOfMergedArray++;
+            array[indexOfMergedArray++] = rightArray[indexOfSubArrayTwo++];
         }
     }
 }

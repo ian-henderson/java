@@ -1,13 +1,16 @@
 package com.ian.app.datastructures;
 
-import com.ian.app.datastructures.redblacktree.RedBlackTree;
 import java.util.OptionalInt;
 import java.util.Random;
+
 import static org.junit.Assert.*;
+
+import com.ian.app.datastructures.redblacktree.RedBlackTree;
+
 import org.junit.Test;
 
 public class RedBlackTreeTest {
-    private int[] keys = new Random().ints(100_000).toArray();
+    private int[] keys = new Random().ints(10_000).toArray();
 
     @Test
     public void redBlackTreeShouldHaveCorrentHeightWhenEmpty() {

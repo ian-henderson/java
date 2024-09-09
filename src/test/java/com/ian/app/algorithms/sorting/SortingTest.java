@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class SortingTest {
-    private int[] unsortedKeys = new Random().ints(25_000).toArray();
+    private int[] unsortedKeys = new Random().ints(50_000).toArray();
 
     @Test
     public void bubbleSortShouldSortCorrectly() {
